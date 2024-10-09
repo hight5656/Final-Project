@@ -1,0 +1,56 @@
+.comment-section {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.comment-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.comment-item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.comment-form {
+  margin-top: 20px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Адаптація для мобільних пристроїв */
+@media (max-width: 600px) {
+  .comment-section {
+      width: 90%; /* Ширина секції для мобільних */
+  }
+  
+  textarea {
+      padding: 8px; /* Зменшення padding для зручності на мобільних */
+  }
+  
+  button {
+      padding: 8px 16px; /* Зменшення розміру кнопки */
+  }
+}

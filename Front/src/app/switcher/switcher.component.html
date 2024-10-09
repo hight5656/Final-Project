@@ -1,0 +1,7 @@
+<div class="box">
+    <input type="checkbox"  id="toggle" class="type-checkbox" id="toggle" (change)="onToggle($event)">
+    <label for="toggle" >
+      <span   *ngIf="isDarkMode" class="aprobado">Dark Mode</span>
+      <span   *ngIf="!isDarkMode"  class="desaprobado">Ligth Mode</span>
+    </label>
+  </div>

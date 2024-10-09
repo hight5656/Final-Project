@@ -1,0 +1,112 @@
+<!-- <section class="login-section" *ngIf="!isAuthenticated">
+  <div class="login-form">
+    <h2>Please Log In</h2>
+    <form (ngSubmit)="login()">
+      <div>
+        <label for="username">Username:</label>
+        <input id="username" [(ngModel)]="loginData.username" name="username" required>
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input id="password" type="password" [(ngModel)]="loginData.password" name="password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <div *ngIf="loginError" class="error-message">Incorrect username or password</div>
+  </div>
+</section> -->
+
+
+
+<section class="body-admin" [ngClass]="{'admin-form-show': isAdminForm, 'admin-form-hide': !isAdminForm}">
+ 
+  <div class="main2" *ngIf="!isAuthenticated">
+    
+    <input type="checkbox" id="chk" aria-hidden="true">
+
+    <!-- Форма для входу -->
+    <div class="signup-form">
+      
+      <!-- <div class="home"> <i class="fa fa-home" aria-hidden="true"></i></div> -->
+      <form (ngSubmit)="login()">
+        <label for="chk" aria-hidden="true" class="signup-label">Home <i class="fa fa-home" aria-hidden="true"></i></label>
+        <input type="text" name="txt" placeholder="User name" [(ngModel)]="loginData.username" name="username" required>
+        <input type="password" name="pswd" placeholder="Password" [(ngModel)]="loginData.password" name="password" required>
+        <button type="submit" class="signup-button">Login</button>
+      </form>
+    </div>
+
+    <div class="login-form">
+      <div class="home" (click)="onClikHome()"> <i class="fa fa-home" aria-hidden="true"></i></div>
+      
+    </div>
+  </div>
+</section>
+
+
+<section class="main" *ngIf="isAuthenticated" >
+  <!-- Форма для додавання нового продукту -->
+  <h2 style="text-align:center;background-color:#343a40;height:10%;padding-top:2.5% 0% 1.5% 0%;">App Shop</h2>
+  <button class="btn"  id="customBtn" style="right:20%" (click)="onClikHome()">Home</button>
+  <button class="btn"  id="customBtn" (click)="onClick()">Product Setting</button>
+  <div id="sidebar-main" class="sidebar sidebar-default sidebar-separate sidebar-fixed">
+    
+  
+        <div class="sidebar-user">
+          <div class="admin-img">
+            <h6>John Doe</h6>
+            <small>Admin</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay" *ngIf="isFormVisible" (click)="closeForm()">
+        <div class="form-container" (click)="$event.stopPropagation()">
+          <form (ngSubmit)="addProduct()">
+            <div>
+              <label for="name">Name:</label><br>
+              <input id="name" [(ngModel)]="newProduct.name" name="name" required>
+            </div>
+            <div>
+              <label for="description">Description:</label><br>
+              <input id="description" [(ngModel)]="newProduct.description" name="description" required>
+            </div>
+            <div>
+              <label for="description">Overview:</label><br>
+              <input id="description" [(ngModel)]="newProduct.overview" name="Overview" required>
+            </div>
+            <div>
+              <label for="price">Price:</label><br>
+              <input id="price" type="number" [(ngModel)]="newProduct.price" name="price" required>
+            </div>
+            <div>
+              <label for="image">Img main:</label><br>
+              <input id="image" [(ngModel)]="newProduct.image" name="image" required>
+            </div>
+            <div>
+              <label for="image">Img for detail product:</label><br>
+              <input id="image" [(ngModel)]="newProduct.image2" name="image" required>
+            </div>
+            <button type="submit">Add Product</button>
+            <button type="button" (click)="closeForm()">Cancel</button>
+          </form>
+        </div>
+      </div>
+  <!-- Список продуктів -->
+  <div *ngIf="products.length > 0">
+    <h2>Product List</h2>
+    <div class="product-list">
+      <div *ngFor="let product of products" class="product-card">
+        <img [src]="product.image" alt="{{ product.name }}" class="product-image">
+        <div class="product-info">
+          <p>{{ product.name }}</p>
+          <p>{{ product.description }}</p>
+          <p>{{ product.price | currency }}</p>
+          <button (click)="editProduct(product.id)">Edit</button>
+          <button (click)="deleteProduct(product.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

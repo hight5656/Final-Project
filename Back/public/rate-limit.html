@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/1.css">
+    <link rel="stylesheet" href="./css/toogle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/uuid/dist/umd/uuid.min.js" defer></script>
+    <script src="./js/verify.js" defer></script>
+</head>
+<body>
+    <section class="body">
+        <div class="box">
+            <input type="checkbox" class="type-checkbox" id="toggle">
+            <label for="toggle">
+              <span class="aprobado">Dark Mode</span>
+              <span class="desaprobado">Ligth Mode</span>
+            </label>
+          </div>
+          
+        <div class="box-messages">
+            <h2>Messages</h2>
+   
+                <p>Your CAPTCHA has been verified successfully. You can now access the site.</p>
+                <i class="fa-solid fa-xmark close"  id="closedCapMes"  style="color: #ffffff;"></i>
+        </div>
+        <div class="box-messages eror" id="errorBox">
+            <h2>Messages</h2>
+   
+            <p>Your CAPTCHA verification has failed. Please try again.</p>
+                <i class="fa-solid fa-xmark close"  id="closedCapMesEror"  style="color: #ffffff;"></i>
+        </div>
+      
+        
+           <section class="wrapper">
+        
+               <div class="container">
+        
+                   <div id="scene" class="scene" data-hover-only="false">
+        
+        
+                       <div class="circle" data-depth="1.2"></div>
+        
+                       <div class="one" data-depth="0.9">
+                           <div class="content">
+                               <span class="piece"></span>
+                               <span class="piece"></span>
+                               <span class="piece"></span>
+                           </div>
+                       </div>
+        
+                       <div class="two" data-depth="0.60">
+                           <div class="content">
+                               <span class="piece"></span>
+                               <span class="piece"></span>
+                               <span class="piece"></span>
+                           </div>
+                       </div>
+        
+                       <div class="three" data-depth="0.40">
+                           <div class="content">
+                               <span class="piece"></span>
+                               <span class="piece"></span>
+                               <span class="piece"></span>
+                           </div>
+                       </div>
+        
+                       <p class="p404" data-depth="0.60">Opps..</p>
+                       <p class="p404" data-depth="0.10"></p>
+        
+                   </div>
+        
+                   <div class="text">
+                       <article>
+                           <p>Uh oh! Looks like you are robot. <br></p>
+                           <button id="verify">Verify</button>
+                       </article>
+                   </div>
+        
+               </div>
+               
+               <section class="captch" id="showBlock">
+           
+                            <div class="captchaBlock">
+                                <h3>reCAPTCHA</h3>
+                                
+                                <div class="margin">
+                                    <input readonly  class="input2" draggable="false"   id="captureValue">
+                                    <i class="fa-solid fa-arrows-rotate fa-beat-fade"  id="refreshCap" style="color: #ffffff;"></i>
+                                </div>
+                                <div class="margin">
+                                    <input class="input2" id="captureValueType">
+                                </div>
+                                <div>
+                                    <button class="butSubmit" id="butSubmit">Submit</button>
+                                </div>
+                            </div>
+
+               </section>
+           </section>
+         </section>
+</body>
+</html>

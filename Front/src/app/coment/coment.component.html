@@ -1,0 +1,23 @@
+<div class="comment-section">
+    <h2>Коментарі</h2>
+    
+    <ul class="comment-list">
+      <li *ngFor="let comment of comments" class="comment-item">
+        {{ comment }}
+      </li>
+    </ul>
+  
+    <form (ngSubmit)="addComment()" class="comment-form">
+      <label for="comment">Додати коментар:</label>
+      <textarea
+        id="comment"
+        [(ngModel)]="newComment"
+        name="comment"
+        required
+        rows="4"
+        placeholder="Напишіть коментар..."
+      ></textarea>
+      <button type="submit">Додати коментар</button>
+    </form>
+  </div>
+  
