@@ -1,0 +1,306 @@
+
+<app-loader *ngIf="isLoading"></app-loader>
+<div [@fadeIn] *ngIf="!isLoading"  [class.dark-mode]="isDarkMode">
+<div class="menu-btn">
+  <i class="fas fa-bars fa-2x"></i>
+</div>
+<!-- <app-switcher></app-switcher> -->
+<div class="container">
+  <!-- Nav -->
+  <nav class="main-nav">
+    <a href="/">  <img src="https://cdn.dribbble.com/userupload/9961503/file/original-23f17ddea64c055d986bad2fc70e8718.jpg?resize=400x0" alt="Microsoft" class="logo">
+    </a>
+   
+
+    <ul class="main-menu">
+      <li><a href="#">Office</a></li>
+    
+      <li><a href="#">Product</a></li>
+      
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#information">Information</a></li>
+     <li><select #curensy (change)="onChange(curensy.value)" id="categorySelect" cli>
+        <option value="">Currency</option>
+        <option selected="selected
+        " value="$">$</option>
+        <option value="£">£</option>
+        <option value="€">€</option>
+       
+        </select>
+     </li>
+    </ul>
+
+    <ul class="right-menu">
+    <li >
+      <i class="fas fa-user-shield" id="admin" (click)="onClickAdmin()"></i>
+    </li>
+      <li>
+      
+        <input 
+  type="text" 
+  placeholder="Search products..." 
+  class="input-group-text" 
+  [(ngModel)]="searchText" 
+  (ngModelChange)="filterProducts()">
+          
+  
+      <li>
+        <a href="#">
+          <i class="fas fa-shopping-cart" (click)="opBasketList() ">
+            <div class="box-cardb" *ngIf="isBasketMumber" >
+                <span class="value-card">{{getLength()}}</span>
+            </div>
+          </i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- app.component.html -->
+
+
+  <!-- basket -->
+
+  <section>
+    <div class="overlay" *ngIf="isBasketList" (click)="closeForm()">
+      <div class="box2" (click)="$event.stopPropagation()">
+        <div class="top-box">
+          <h3>Shopping Cart</h3>
+          <span class="remove-all" (click)="onRemoveAll()">Remove ALL</span>
+        </div>
+        <div class="close-alllist">
+          <i class="fas fa-times close-icon" (click)="closeAlist()"></i>
+        </div>
+  
+        <div *ngFor="let item of shoppingCart; let i = index" class="form-container2">
+          <div class="box-img2">
+            <img [src]="item.image" class="img-cards2" alt="{{ item.name }}">
+          </div>
+          <div class="item-info">
+            <span class="label">Product</span>
+            <p class="item-name">{{ item.name }}</p>
+          </div>
+  
+          <div class="quantity-controls">
+            <button class="btn-quantity" (click)="deCrease(i)">
+              <i class="fas fa-minus"></i>
+            </button>
+            <span>{{ item.quantity }}</span>
+            <button class="btn-quantity" (click)="inCrease(i)">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+  
+          <div class="price-remove">
+            <span class="item-price">{{ item.price }}$</span>
+            <span class="remove-item" (click)="removeItem(i)">Remove</span>
+          </div>
+        </div>
+  
+        <hr>
+  
+        <div class="box-total">
+          <div class="sub-total">
+            <span class="label">Sub-Total</span>
+            <span>{{ getTotalItems() }} items</span>
+          </div>
+          <div>
+            <span class="total-price">{{ getTotalPrice() }}$</span>
+          </div>
+        </div>
+  
+        <div class="box-but2">
+          <button class="custom-btn2 btn-3" (click)="onCheckout()"><span>Checkout</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <app-switcher (toggleMode)="onModeToggle($event)"></app-switcher>
+
+ 
+  <!-- Home cards 1 -->
+  <section class="home-cards section">
+    <!-- Перевірка наявності продуктів -->
+    <div *ngIf="filteredProducts.length === 0" class="no-products">
+      <p>No products found.</p>
+    </div>
+  
+    <!-- Відображення кожного фільтрованого продукту -->
+    <div *ngFor="let item of filteredProducts" (click)="selectProduct(item.id)" class="product-card">
+      <img class="img" [src]="item.image" width="400" height="350" alt="{{ item.name }}">
+      <div class="box-info-card">
+        <h3 class="card-top">{{ item.name }}</h3>
+        <p class="text-card">{{ item.description }}</p>
+        <p class="card-price" >{{curensy.value}} {{ convertPrice(item.price) | number: '1.2-2' }}</p>
+        <a [routerLink]="['/product', item.id]" class="learn-more-link">
+          Learn More <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- Xbox -->
+  <div class="tv-frame">
+    <img src="https://www.apple.com/v/apple-vision-pro/e/images/overview/hero/hero_us_startframe__bj4ciwxazquq_large.jpg" style="width: 100%;">
+   <div class="descr-pro"> 
+    <img src="https://www.apple.com/v/apple-vision-pro/e/images/overview/hero/apple_vision_pro_logo__ux94yix23r6y_large.png" alt="">
+   </div>
+  </div>
+
+
+
+  
+
+
+
+
+  <!-- Home cards 2 -->
+    <section class="home-cards2 marginbotom section"  #section id="information">
+      <div class="img" >
+        <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/store-card-50-homekit-202405_GEO_GB?wid=960&hei=1000&fmt=p-jpg&qlt=95&.v=1715960300244" alt="" />
+        <div class="box-card2" style="left:3%;font-size: 20px;color:#6c6767;">
+          <h3 style="color:#b2acac;">Speakers of the house.</h3>
+          <p>
+            Connected smart home — with Siri <br>built in — that’s private and secure.
+          </p>
+          <a href="#">Shop Now <i class="fas fa-chevron-right"></i></a>
+        </div>
+      </div>
+      <div class="img" >
+        <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/card-50-instigators-202407?wid=960&hei=1000&fmt=p-jpg&qlt=95&.v=1718912965413" alt="" />
+       <div class="box-card2">
+        <h3 class="top-secondcard">APLLE TV+</h3>
+        <p>
+          Watch new Apple Originals every&nbsp;month.° 
+        </p>
+       </div>
+     
+       
+        <!-- <a href="#">Shop Now <i class="fas fa-chevron-right"></i></a> -->
+      </div>
+      <div class="img" >
+        <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/store-card-25-genius-202108?wid=960&hei=480&fmt=p-jpg&qlt=95&.v=1626384443000" alt="" />
+        <div class="box-card2" style="top:74%;left:3%;font-size:25px;color:#6c6767">
+          <p>
+            Get expert service <br>and support at <br>the Genius Bar.
+          </p>
+          <a href="#">Download Now <i class="fas fa-chevron-right"></i></a>
+        </div>
+       
+      </div>
+      <div class="img">
+        <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/store-card-25-apps-202108?wid=960&hei=480&fmt=p-jpg&qlt=95&.v=1626223748000" alt="" />
+       <div class="box-card2" style="top:70%;color:#6c6767;font-size:18px;">
+        <p>
+          Get help setting up your new device in a free Online Personal Session.
+        </p>
+        <a href="#">Get Started <i class="fas fa-chevron-right"></i></a>
+       </div>
+      
+         
+      </div>
+    </section>
+    
+    <!-- Carbon -->
+    <section class="carbon dark section"  #section id="shop">
+      <div class="content">
+        <h2>Apple Fairview</h2>
+        <p>Store. The best way to buy the products you love.</p>
+          <a href="#" class="btn">
+           Shop Now <i class="fas fa-chevron-right"></i>
+          </a>
+      </div>
+    </section>
+
+    <!-- Follow -->
+    <section class="follow"  #section>
+      <p>Follow  Us</p>
+      <a href="https://facebook.com">
+        <img src="https://i.ibb.co/LrVMXNR/social-fb.png" alt="Facebook">
+      </a>
+      <a href="https://twitter.com">
+        <img src="https://i.ibb.co/vJvbLwm/social-twitter.png" alt="Twitter">
+      </a>
+      <a href="https://linkedin.com">
+        <img src="https://i.ibb.co/b30HMhR/social-linkedin.png" alt="Linkedin">
+      </a>
+    </section>
+  </div>
+<div class="feadback">
+  <h2>Product Feedback</h2><i class="fa-solid fa-comment" (click)="onClickOpenForm()" *ngIf="isCloseComentForm"></i><i class="fa-solid fa-x"  (click)="onClickForm()" *ngIf="isCloseComentFormX" ></i>
+  
+  
+</div>
+  
+  <app-coment *ngIf="isShowComent"></app-coment>
+    <!-- Links -->
+    <section class="links"  #section>
+      <div class="links-inner">
+        <ul>
+          <li><h3>What's New</h3></li>
+          <li><a href="#">Iphone 15 pro</a></li>
+          <li><a href="#">Apple Watch Hermes</a></li>
+          <li><a href="#">Ipad Pro</a></li>
+          <li><a href="#">Mew Ios Retina</a></li>
+          <li><a href="#">Office apps</a></li>
+        </ul>
+        <ul>
+          <li><h3>Apple Store</h3></li>
+          <li><a href="#">Find a Store</a></li>
+          <li><a href="#">Download Center</a></li>
+          <li><a href="#">Apple Summer Camp</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Older tracking</a></li>
+        </ul>
+        <ul>
+          <li><h3>Education</h3></li>
+          <li><a href="#">Microsfot in education</a></li>
+          <li><a href="#">Office for students</a></li>
+          <li><a href="#">Office 365 for schools</a></li>
+          <li><a href="#">Deals for studentss</a></li>
+          <li><a href="#">Microsfot Azure</a></li>
+        </ul>
+        <ul>
+          <li><h3>Enterprise</h3></li>
+          <li><a href="#">Azure</a></li>
+          <li><a href="#">AppSource</a></li>
+          <li><a href="#">Automotive</a></li>
+          <li><a href="#">Government</a></li>
+          <li><a href="#">Healthcare</a></li>
+        </ul>
+        <ul>
+          <li><h3>Developer</h3></li>
+          <li><a href="#">Visual Studio</a></li>
+          <li><a href="#">IOS Dev Center</a></li>
+          <li><a href="#">Developer Network</a></li>
+          <li><a href="#">TechNet</a></li>
+          <li><a href="#">Microsoft Developer</a></li>
+        </ul>
+        <ul>
+          <li><h3>Company</h3></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">About Apple</a></li>
+          <li><a href="#">Company news</a></li>
+          <li><a href="#">Privacy at Apple</a></li>
+          <li><a href="#">Inverstors</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div><i class="fas fa-globe fa-2x"></i> English (Ukraine)</div>
+        <ul>
+          <li><a href="#">Sitemap</a></li>
+        <li><a href="#">Contact Apple</a></li>
+        <li><a href="#">Privacy & cookies</a></li>
+        <li><a href="#">Terms of use</a></li>
+        <li><a href="#">Trademarks</a></li>
+        <li><a href="#">Safety & eco</a></li>
+        <li><a href="#">About our ads</a></li>
+        <li><a href="#">&copy; AppShop 2024</a></li>
+        </ul>
+      </div>
+    </footer>
+   
+</div>
