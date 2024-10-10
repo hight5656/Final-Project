@@ -1,0 +1,295 @@
+
+    <div class="menu-btn">
+      <i class="fas fa-bars fa-2x"></i>
+    </div>
+    
+    <div class="container">
+      <!-- Nav -->
+      <nav class="main-nav">
+        <a href="/">  <img src="https://cdn.dribbble.com/userupload/9961503/file/original-23f17ddea64c055d986bad2fc70e8718.jpg?resize=400x0" alt="Microsoft" class="logo">
+        </a>
+       
+        <ul class="main-menu">
+          <li><a href="/ofice">Office</a></li>
+         
+          <li><a href="#">Product</a></li>
+          
+          <li><a href="#shop">Shop</a></li>
+          <li><a href="#information">Information</a></li>
+         <li><select #curensy (change)="onChange(curensy.value)" id="categorySelect" cli>
+          <option value="">Currency</option>
+          <option selected="selected
+          " value="$">$</option>
+          <option value="£">£</option>
+          <option value="€">€</option>
+         
+         
+           
+            </select>
+         </li>
+        </ul>
+    
+        <ul class="right-menu">
+         
+          <li>
+            <a href="#">
+              <i class="fas fa-shopping-cart" >
+                <div class="box-cardb" *ngIf="isBasketMumber" (click)="opBasketList()">
+                    <span class="value-card">{{ getLength()}}</span>
+                </div>
+              </i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    
+      <div style="margin-bottom: 5%; background-color:white">
+        <div class="box-inf">
+          <h3 class="nm">By {{ product.name }}</h3>
+          
+          <p style="margin:0% 2% 0% 2%">From £41.62/per month Footnote ** or ${{ product.price }}</p>
+        
+        </div>
+        
+        <div *ngIf="product" class="box" style="margin-bottom:5%">
+          <img [src]="product.image2"  alt="{{ product.name }} "  >
+          <div class="back-watch" >
+            <div class="dot" 
+         *ngFor="let dot of dots; let i = index"
+         (click)="onClick(i)" 
+         [style.blur]="dot ? 'grey' : ''"></div>
+          </div>
+          <div style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+          font-size: 1.2rem;
+          font-family: monospace;
+          color: black;
+          margin-top: 5%;
+          
+      ">
+              <span>{{product.nam}}</span>
+              <span>{{product.des}}</span>
+          </div>
+          <div class="butInf">
+            <a href="#" class="btn" style="background-color:#75797c">
+             Learn more <i class="fas fa-chevron-right"></i>
+             </a>
+             <a href="#" class="btn"   (click)="onOpenForm()"  style="background-color:#0271e3;">
+              Buy <i class="fas fa-chevron-right"></i>
+             </a>
+          </div>
+         
+        </div>
+       
+      </div>
+
+      <div class="overlay" *ngIf="isFormVisible" (click)="closeForm()">
+        <div class="product-card" (click)="$event.stopPropagation()">
+          <div class="product-image-container">
+            <img class="product-image" [src]="product.image2" alt="{{ product.name }}">
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">{{ product.nam }}</h3>
+            <p class="product-price">{{ product.price }} {{ curensy.value }}</p>
+          </div>
+          <div class="quantity-container">
+            <button class="quantity-btn" (click)="onDcrProduct()">-</button>
+            <span class="quantity">{{ qt }}</span>
+            <button class="quantity-btn" (click)="onCreseProduct()">+</button>
+          </div>
+          <div class="actions">
+            <button class="btn add-btn" (click)="addBasket()">Add to Basket</button>
+            <button class="btn cancel-btn" (click)="closeForm()">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+
+
+      <section>
+        <div class="overlay" *ngIf="isBasketList" (click)="closeForm()">
+          <div class="box2" (click)="$event.stopPropagation()">
+            <div class="top-box">
+              <h3>Shopping Cart</h3>
+              <span class="remove-all" (click)="onRemoveAll()">Remove ALL</span>
+            </div>
+            <div class="close-alllist">
+              <i class="fas fa-times close-icon" (click)="closeAlist()"></i>
+            </div>
+      
+            <div *ngFor="let item of shoppingCart; let i = index" class="form-container2">
+              <div class="box-img2">
+                <img [src]="item.image" class="img-cards2" alt="{{ item.name }}">
+              </div>
+              <div class="item-info">
+                <span class="label">Product</span>
+                <p class="item-name">{{ item.name }}</p>
+              </div>
+      
+              <div class="quantity-controls">
+                <button class="btn-quantity" (click)="deCrease(i)">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <span>{{ item.quantity }}</span>
+                <button class="btn-quantity" (click)="inCrease(i)">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+      
+              <div class="price-remove">
+                <span class="item-price">{{ item.price }}$</span>
+                <span class="remove-item" (click)="removeItem(i)">Remove</span>
+              </div>
+            </div>
+      
+            <hr>
+      
+            <div class="box-total">
+              <div class="sub-total">
+                <span class="label">Sub-Total</span>
+                <span>{{ getTotalItems() }} items</span>
+              </div>
+              <div>
+                <span class="total-price">{{ getTotalPrice() }}$</span>
+              </div>
+            </div>
+      
+            <div class="box-but2">
+              <button class="custom-btn2 btn-3" (click)="onCheckout()"><span>Checkout</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+      
+      
+
+      <section>
+        <div class="product-inform" id="product">
+         
+           
+              <h3 class="whats">What’s in the Box</h3>
+              <img [src]="product.im3"/>
+              
+              <h3 style="margin:4%">{{product.nam}}</h3>
+            
+        </div>
+        <hr style="color:grey;">
+        <div>
+          <div class="over-cl">
+            <div class="over-product" id="information">Product Information</div>
+            <div (click)="toggleOverview()" style="font-size:2.2rem; color:grey; cursor: pointer;">
+              <i class="fas" [ngClass]="{'fa-angle-up': isOverviewVisible, 'fa-angle-down': !isOverviewVisible}"></i>
+            </div>
+          </div>
+          <div class="over-cl" [ngClass]="{'expand': isOverviewVisible, 'collapse': !isOverviewVisible}" >
+            <div class="over-product"  *ngIf="isOverviewVisible">Overview</div>
+            <div class="inf-oveer">
+              <pre>{{ product.overview }}</pre>
+            </div>
+          </div>
+          
+          
+          
+          
+        </div>
+        <hr style="height: 50px;color:grey;">
+      </section>
+      
+      <section class="carbon dark"  id="shop">
+        <div class="content">
+          <h2>Apple Fairview</h2>
+          <p>Store. The best way to buy the products you love.</p>
+            <a href="#" class="btn">
+             Shop Now <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+      </section>
+      <section class="follow"  #section>
+        <p>Follow  Us</p>
+        <a href="https://facebook.com">
+          <img src="https://i.ibb.co/LrVMXNR/social-fb.png" alt="Facebook">
+        </a>
+        <a href="https://twitter.com">
+          <img src="https://i.ibb.co/vJvbLwm/social-twitter.png" alt="Twitter">
+        </a>
+        <a href="https://linkedin.com">
+          <img src="https://i.ibb.co/b30HMhR/social-linkedin.png" alt="Linkedin">
+        </a>
+      </section>
+    </div>
+      <!-- Links -->
+      <section class="links"  #section>
+        <div class="links-inner">
+          <ul>
+            <li><h3>What's New</h3></li>
+            <li><a href="#">Iphone 15 pro</a></li>
+            <li><a href="#">Apple Watch Hermes</a></li>
+            <li><a href="#">Ipad Pro</a></li>
+            <li><a href="#">Mew Ios Retina</a></li>
+            <li><a href="#">Office apps</a></li>
+          </ul>
+          <ul>
+            <li><h3>Apple Store</h3></li>
+            <li><a href="#">Find a Store</a></li>
+            <li><a href="#">Download Center</a></li>
+            <li><a href="#">Apple Summer Camp</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Older tracking</a></li>
+          </ul>
+          <ul>
+            <li><h3>Education</h3></li>
+            <li><a href="#">Microsfot in education</a></li>
+            <li><a href="#">Office for students</a></li>
+            <li><a href="#">Office 365 for schools</a></li>
+            <li><a href="#">Deals for studentss</a></li>
+            <li><a href="#">Microsfot Azure</a></li>
+          </ul>
+          <ul>
+            <li><h3>Enterprise</h3></li>
+            <li><a href="#">Azure</a></li>
+            <li><a href="#">AppSource</a></li>
+            <li><a href="#">Automotive</a></li>
+            <li><a href="#">Government</a></li>
+            <li><a href="#">Healthcare</a></li>
+          </ul>
+          <ul>
+            <li><h3>Developer</h3></li>
+            <li><a href="#">Visual Studio</a></li>
+            <li><a href="#">IOS Dev Center</a></li>
+            <li><a href="#">Developer Network</a></li>
+            <li><a href="#">TechNet</a></li>
+            <li><a href="#">Microsoft Developer</a></li>
+          </ul>
+          <ul>
+            <li><h3>Company</h3></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">About Apple</a></li>
+            <li><a href="#">Company news</a></li>
+            <li><a href="#">Privacy at Apple</a></li>
+            <li><a href="#">Inverstors</a></li>
+          </ul>
+        </div>
+      </section>
+  
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-inner">
+          <div><i class="fas fa-globe fa-2x"></i> English (Ukraine)</div>
+          <ul>
+            <li><a href="#">Sitemap</a></li>
+          <li><a href="#">Contact Apple</a></li>
+          <li><a href="#">Privacy & cookies</a></li>
+          <li><a href="#">Terms of use</a></li>
+          <li><a href="#">Trademarks</a></li>
+          <li><a href="#">Safety & eco</a></li>
+          <li><a href="#">About our ads</a></li>
+          <li><a href="#">&copy; AppShop 2024</a></li>
+          </ul>
+        </div>
+      </footer>
+     
