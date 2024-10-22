@@ -2,13 +2,13 @@
 ## 🌟 Introduction
 Hello there! Welcome to my project repository, where I’m building practical applications to enhance my web development skills. This project is a collaborative effort aimed at improving our abilities in creating efficient, responsive, and user-friendly web applications. Through this project, I focus on mastering modern frontend technologies and best practices, with an emphasis on clean architecture and scalable design. Our goal is to deliver a maintainable and robust solution while continually improving our coding techniques and workflows.
 ## 📖 Table of Contents
-- [Introduction](#introduction)
-- [Project Description](#project-description)
-- [Architecture](#architecture)
-- [Features](#features)
-- [Technology](#technology)
-- [Project Setup and Launch Instructions](#project-setup-and-launch-instructions)
-- [Usage Instructions](#usage-instructions)
+- [Introduction](#Introduction)
+- [Project Description](#Project-Description)
+- [Architecture](#Architecture)
+- [Features](#Features)
+- [Technology](#Technology)
+- [Project Setup and Launch Instructions](#Project-Setup-and-Launch-Instructions)
+- [Usage Instructions](#Usage-Instructions)
 ## 📦 Project Description
 This project was created to simplify product management and communication with users through integration with the Telegram API. It includes a frontend built with Angular for dynamic content and interactivity, and Node.js on the backend for request handling and data management.
 ### 🛠️ Architecture:
